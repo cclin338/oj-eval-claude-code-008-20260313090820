@@ -1,0 +1,23 @@
+# 2279 - echo
+# Read all input and output exactly the same
+
+# Read character into A
+A<I
+
+# If A is 0 (EOF), halt
+# Otherwise output and continue
+# We use memory to check if A is zero
+
+# Set up lookup: mem[0] = 1 (flag to halt), others = 0
+[0]<1
+
+# Check if A is 0
+B<[A]
+
+# If B is 1, halt
+Z<B
+
+# Output A
+O<A
+
+# Loop continues automatically
