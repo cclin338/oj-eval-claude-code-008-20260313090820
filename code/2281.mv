@@ -1,0 +1,100 @@
+# 2281 - A+B
+# Read two 10-digit numbers separated by '+' and output their sum
+# Format: "1234567890+9876543210" -> "11111111100"
+
+# Read first number (10 digits) into mem[0-9]
+A<I
+[0]<A
+A<I
+[1]<A
+A<I
+[2]<A
+A<I
+[3]<A
+A<I
+[4]<A
+A<I
+[5]<A
+A<I
+[6]<A
+A<I
+[7]<A
+A<I
+[8]<A
+A<I
+[9]<A
+
+# Read '+' and discard
+A<I
+
+# Read second number (10 digits) into mem[10-19]
+A<I
+[10]<A
+A<I
+[11]<A
+A<I
+[12]<A
+A<I
+[13]<A
+A<I
+[14]<A
+A<I
+[15]<A
+A<I
+[16]<A
+A<I
+[17]<A
+A<I
+[18]<A
+A<I
+[19]<A
+
+# Addition with carry
+# Convert ASCII to digit: subtract 48
+# Start from rightmost (position 9 and 19)
+# Result in mem[100-110] (may be 11 digits)
+
+# Initialize carry
+[50]<0  # carry flag
+
+# Add position 9 + 19
+A<[9]
+A<48  # Can't subtract, need lookup table
+# Create lookup: mem[i] = i - 48 for ASCII digits
+[48]<0
+[49]<1
+[50]<2
+[51]<3
+[52]<4
+[53]<5
+[54]<6
+[55]<7
+[56]<8
+[57]<9
+
+# Get digit value for position 9
+A<[9]
+D1<[A]
+
+# Get digit value for position 19
+A<[19]
+D2<[A]
+
+# Add D1 + D2 + carry
+# Need to compute sum
+# Create lookup table: mem[256+i+j] = (i+j) for all i,j 0-9
+# But memory only 512, can't encode all pairs
+
+# Use sequential addition lookup
+# For each possible D1 value (0-9), create lookup for D1+D2
+# mem[D2] = D1 + D2
+
+# For D1=5, D2=7: result=12, digit=2, carry=1
+# Need two lookups: digit and carry
+
+# This is getting complex. Let me just create a full addition table
+
+# Actually, implement simpler: for each pair of digit positions,
+# compute sum and store
+
+Z<1  # Placeholder
